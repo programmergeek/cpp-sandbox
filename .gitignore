@@ -1,4 +1,3 @@
 *.out
 build/
-.clangd
-.clangd-wrapper
+*clangd*
