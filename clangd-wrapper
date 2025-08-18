@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+export CPLUS_INCLUDE_PATH="/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/include/c++/14.3.0:/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/include/c++/14.3.0/x86_64-unknown-linux-gnu:/nix/store/m3n0h7646c7qwf6dbvdqhslmxmv2dg3z-glibc-2.40-66-dev/include:/nix/store/lp9agkj5pykd83ndmijvpxcdg0lfvzis-linux-headers-6.12.7/include:$CPLUS_INCLUDE_PATH"
+export C_INCLUDE_PATH="/nix/store/m3n0h7646c7qwf6dbvdqhslmxmv2dg3z-glibc-2.40-66-dev/include:/nix/store/lp9agkj5pykd83ndmijvpxcdg0lfvzis-linux-headers-6.12.7/include:$C_INCLUDE_PATH"
+exec /nix/store/sm2pmndi4srnb31b5a13bgg4il5xy1yr-clang-tools-19.1.7/bin/clangd \
+  --query-driver=/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/gcc,/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++,/nix/store/4kb26qqjpf23gmi26ddbp86g0cfj3l6p-clang-wrapper-19.1.7/bin/clang,/nix/store/4kb26qqjpf23gmi26ddbp86g0cfj3l6p-clang-wrapper-19.1.7/bin/clang++ \
+  --header-insertion=never \
+  --compile-commands-dir=build \
+  --background-index \
+  --clang-tidy \
+  "$@"
