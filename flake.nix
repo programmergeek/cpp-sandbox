@@ -79,6 +79,9 @@
             export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu=1
             export NIX_CC_WRAPPER_x86_64_unknown_linux_gnu_TARGET_HOST=1
             
+	    # Add scripts to PARH
+	    export PATH=~/Documents/dev-projects/personal/cpp-sandbox/scripts:$PATH
+
             # Standard library paths for nix-ld compatibility
             export C_INCLUDE_PATH="${pkgs.glibc.dev}/include:${pkgs.linuxHeaders}/include:$C_INCLUDE_PATH"
             export LIBRARY_PATH="${pkgs.glibc}/lib:${pkgs.gcc.cc.lib}/lib:$LIBRARY_PATH" 
