@@ -48,6 +48,10 @@
             # Optional: Language servers for IDE support
             # clangd is included in clang-tools above
             bear    # For generating compile_commands.json
+
+	    # project dependencies
+	    # 1. Inventory management system
+	    sqlite
           ];
 
           # Environment variables
@@ -93,7 +97,10 @@
             cat > .clangd << EOF
 CompileFlags:
   Add:
-    - -std=c++20
+    - -std=c++17
+    - -isystem${pkgs.gcc.cc}/include/c++/${pkgs.gcc.version}
+    - -isystem${pkgs.gcc.cc}/include/c++/${pkgs.gcc.version}/x86_64-unknown-linux-gnu
+    - -isystem${pkgs.glibc.dev}/include
   CompilationDatabase: build
 Index:
   Background: Build
@@ -122,7 +129,7 @@ WRAPPER_EOF
             echo '#include <iostream>' | ${pkgs.gcc}/bin/g++ -E -x c++ - >/dev/null 2>&1 && echo "✓ C++ headers found" || echo "✗ C++ headers missing"
             
             # Set C++ standard (adjust as needed)
-            export CXXFLAGS="-std=c++20"
+            export CXXFLAGS="-std=c++17"
           '';
 
           # Environment variables for development
