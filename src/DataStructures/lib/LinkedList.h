@@ -43,8 +43,6 @@ public:
 
   int length() { return this->_length; }
 
-  void removeByValue(T value);
-
   void removeByIndex(int index) {
 
     if (index == 0) {
@@ -79,7 +77,36 @@ public:
     }
   }
 
-  T *find(T value);
+  T *findByValue(T value) {
+    Node *current = this->_head;
+    while (current != nullptr) {
+      if (*(current->value) == value) {
+        break;
+      }
+      current = current->next;
+    }
+
+    if (current == nullptr) {
+      return nullptr;
+    }
+
+    return current->value;
+  }
+
+  T *findByIndex(int index) {
+    Node *current = this->_head;
+    int counter = 0;
+    if (index > (this->_length - 1) || index < 0) {
+      throw std::invalid_argument("Index out of range");
+    }
+
+    while (counter != index) {
+      current = current->next;
+      counter++;
+    }
+
+    return current->value;
+  }
 
   std::string toString() {
     std::string output = "";
