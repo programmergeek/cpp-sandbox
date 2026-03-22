@@ -7,6 +7,8 @@ int main() {
   list->append(2);
   list->append(3);
   std::cout << list->toString() << std::endl;
+  list->removeByIndex(1);
+  std::cout << list->toString() << std::endl;
   delete list;
   return 0;
 }

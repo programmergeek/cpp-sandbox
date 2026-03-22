@@ -1,6 +1,7 @@
 // LinkedList.h
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
+#include <stdexcept>
 #include <string>
 
 template <typename T>
@@ -42,9 +43,41 @@ public:
 
   int length() { return this->_length; }
 
-  void remove(T value);
+  void removeByValue(T value);
 
-  // void remove(int index);
+  void removeByIndex(int index) {
+
+    if (index == 0) {
+      Node *temp = this->_head;
+      this->_head = this->_head->next;
+      delete temp->value;
+      delete temp;
+      this->_length--;
+    } else if (index > (_length - 1)) {
+      throw std::invalid_argument("Index out of range.");
+    }
+
+    Node *current = this->_head;
+    int count = 0;
+    while (count != index - 1) {
+      current = current->next;
+      count++;
+    }
+
+    if (current->next != this->_tail) {
+      Node *temp = current->next;
+      current->next = current->next->next;
+      delete temp->value;
+      delete temp;
+      this->_length--;
+    } else {
+      Node *temp = this->_tail;
+      this->_tail = current;
+      delete temp->value;
+      delete temp;
+      this->_length--;
+    }
+  }
 
   T *find(T value);
 
